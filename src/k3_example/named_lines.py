@@ -1,6 +1,6 @@
 import sympy as sp
 from sympy import I
-from ci_matrices import c1
+from k3_example.ci_matrices import c1
 
 def named_lines() -> dict:
     '''

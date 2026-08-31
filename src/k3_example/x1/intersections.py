@@ -1,7 +1,7 @@
-from ci_matrices import c
+from k3_example.ci_matrices import c
 import sympy as sp
 import csv
-from named_lines import get_label, compute_c1_names
+from k3_example.named_lines import get_label, compute_c1_names
 
 # ci(m, n) order of the (m, n) tuples for the intersection matrix
 m_n_order = [
