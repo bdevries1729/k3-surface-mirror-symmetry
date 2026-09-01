@@ -2,7 +2,7 @@ import sympy as sp
 from sympy import I
 from k3_example.ci_matrices import c1
 
-def named_lines() -> dict:
+def named_lines() -> dict[str, sp.Matrix]:
     '''
     Returns a dictionary of the named lines (such as xz or ybetabar) and the corresponding matrix
     '''
@@ -25,17 +25,17 @@ def named_lines() -> dict:
         'xbetabar': sp.Matrix([planes['x'], planes['betabar']]),
         'ybeta': sp.Matrix([planes['y'], planes['beta']]),
         'ybetabar': sp.Matrix([planes['y'], planes['betabar']]),
-        'zbeta': sp.Matrix([planes['z'], planes['alpha']]),
-        'zbetabar': sp.Matrix([planes['z'], planes['alphabar']]),
-        'wbeta': sp.Matrix([planes['w'], planes['alpha']]),
-        'wbetabar': sp.Matrix([planes['w'], planes['alphabar']]),
+        'zalpha': sp.Matrix([planes['z'], planes['alpha']]),
+        'zalphabar': sp.Matrix([planes['z'], planes['alphabar']]),
+        'walpha': sp.Matrix([planes['w'], planes['alpha']]),
+        'walphabar': sp.Matrix([planes['w'], planes['alphabar']]),
         'alphabeta': sp.Matrix([planes['alpha'], planes['beta']]),
         'alphabetabar': sp.Matrix([planes['alpha'], planes['betabar']]),
         'alphabarbeta': sp.Matrix([planes['alphabar'], planes['beta']]),
         'alphabarbetabar': sp.Matrix([planes['alphabar'], planes['betabar']]),
     }
 
-def c1_name(m: int, n: int, unused_lines: dict) -> tuple[str, dict]:
+def c1_name(m: int, n: int, unused_lines: dict[str, sp.Matrix]) -> tuple[str, dict[str, sp.Matrix]]:
     '''
     Returns the alternate name for c1(m, n), and the remaining unused lines.
     '''
@@ -48,7 +48,7 @@ def c1_name(m: int, n: int, unused_lines: dict) -> tuple[str, dict]:
     return 'unknown', unused_lines
 
 
-def compute_c1_names() -> list[str]:
+def compute_c1_names() -> list[list[str]]:
     '''
     Returns an array of c1 line names, where the name for c1(m, n) is in the (m, n) position.
     '''
@@ -57,10 +57,10 @@ def compute_c1_names() -> list[str]:
     lines_rref = {name: line_mat.rref()[0] for name, line_mat in lines.items()}
     lines_to_search = lines_rref.copy()
 
-    names = [[''] * 4] * 4
+    names = [['' for _ in range(4)] for _ in range(4)]
     for m in range(4):
         for n in range(4):
-            name, lines_to_search = c1_name(n, m, lines_to_search)
+            name, lines_to_search = c1_name(m, n, lines_to_search)
             names[m][n] = name
     return names
 
