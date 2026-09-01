@@ -48,7 +48,7 @@ def c1_name(m: int, n: int, unused_lines: dict) -> tuple[str, dict]:
     return 'unknown', unused_lines
 
 
-def compute_c1_names() -> list:
+def compute_c1_names() -> list[str]:
     '''
     Returns an array of c1 line names, where the name for c1(m, n) is in the (m, n) position.
     '''

@@ -11,10 +11,10 @@ xy_permutation_matrix = sp.Matrix([
     [0, 0, 0, 1]
 ])
 
-def compute_orbits(print_to_terminal:bool=False) -> list:
+def compute_orbits(print_to_terminal:bool=False) -> list[sp.Matrix]:
     '''
     Generates the orbits of lines under (xy) permutation. Orbits are returned as a list of list of 
-    vectors, with each vector and each coordinate of the vector representing a line (1 for belonging
+    vectors, with each vector an orbit and each coordinate of the vector representing a line (1 for belonging
     to the orbit, and 0 if not). The argument `print_to_terminal` may be enabled.
     '''
     ci_matrices_rref = [ci_mat.rref() for ci_mat in ci_matrices]
