@@ -56,13 +56,13 @@ def generate_and_output_matrix(print_to_terminal:bool=True) -> None:
         writer = csv.writer(f)
         writer.writerows(x1_int_matrix.tolist())
 
+# this could be made more efficient. It suffices as a first pass.
 def compute_intersection_points():
     names = compute_c1_names()
     pts = defaultdict(set)
     for i in range(len(ci_labels)):
         for j in range(i): # notice i != j so we avoid infinite intersection case
             if intersect(ci_matrices[i], ci_matrices[j]):
-                # not ideal, but we convert to floating point numbers for comparison with other points
                 pt = str(list(sp.N(sp.Matrix(intersect_point(ci_matrices[i], ci_matrices[j])), 5)))
                 pts[pt].update([get_label(*ci_labels[i], names=names), get_label(*ci_labels[j], names=names)])
     return pts
