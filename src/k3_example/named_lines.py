@@ -70,5 +70,5 @@ def get_label(i: int, m: int, n: int, names: list) -> str:
     also append the name of that line.
     '''
     if i == 1:
-        return f'c{i}({m}, {n}) - {names[m][n]}'
+        return f'c{i}({m}, {n}) = {names[m][n]}'
     return f'c{i}({m}, {n})'

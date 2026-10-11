@@ -1,5 +1,7 @@
 import sympy as sp
 from sympy import pi, I
+import k3_example.x1.automorphisms.sigma_l as sigma_l
+import k3_example.x1.automorphisms.sigma_r as sigma_r
 
 zeta = sp.exp(2*pi*I/8)
-matrix = sp.diag(zeta ** 3, zeta ** -1, zeta ** 3, zeta ** -1) # type: ignore
+matrix = sigma_l * sigma_r # type: ignore

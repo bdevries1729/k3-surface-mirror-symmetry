@@ -3,6 +3,7 @@ import csv
 from k3_example.named_lines import get_label, compute_c1_names
 from k3_example.x1.lines import ci_labels, ci_matrices
 from collections import defaultdict
+from k3_example.compare import matrix_key
 
 def intersect(line_mat_1: sp.Matrix, line_mat_2: sp.Matrix) -> bool:
     '''
@@ -63,6 +64,6 @@ def compute_intersection_points():
     for i in range(len(ci_labels)):
         for j in range(i): # notice i != j so we avoid infinite intersection case
             if intersect(ci_matrices[i], ci_matrices[j]):
-                pt = str(list(sp.N(sp.Matrix(intersect_point(ci_matrices[i], ci_matrices[j])), 5)))
-                pts[pt].update([get_label(*ci_labels[i], names=names), get_label(*ci_labels[j], names=names)])
+                pt = matrix_key(sp.Matrix(intersect_point(ci_matrices[i], ci_matrices[j])))
+                pts[pt].update([i, j])
     return pts

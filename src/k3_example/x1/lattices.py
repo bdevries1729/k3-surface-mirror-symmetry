@@ -2,7 +2,7 @@ from k3_example.x1.intersections import compute_intersection_matrix
 import k3_example.x1.automorphisms.xy_permutation as xy
 import sympy as sp
 from sympy.matrices.normalforms import smith_normal_form
-from k3_example.orbits import compute_orbits
+from k3_example.orbits import compute_orbits, orbit_basis
 import k3_example.x1.automorphisms.xy_permutation as xy
 import k3_example.x1.automorphisms.sigma_r as sigma_r
 import k3_example.x1.automorphisms.tau as tau
@@ -25,15 +25,18 @@ def full_picard(intersection_matrix=None):
     print_rank_and_discriminant_group(name='Full Picard', intersection_matrix=intersection_matrix)
 
 def xy_invariant_sublattice(intersection_matrix=None):
-    basis = sp.Matrix.hstack(*compute_orbits(group_action_matrix=xy.permutation_matrix))
+    orbits = compute_orbits(group_action_matrix=xy.permutation_matrix)
+    basis = sp.Matrix.hstack(*orbit_basis(orbits))
     print_rank_and_discriminant_group(name='(xy) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
 
 def sigma_r_invariant_sublattice(intersection_matrix=None):
-    basis = sp.Matrix.hstack(*compute_orbits(group_action_matrix=sigma_r.matrix))
+    orbits = compute_orbits(group_action_matrix=sigma_r.matrix)
+    basis = sp.Matrix.hstack(*orbit_basis(orbits))
     print_rank_and_discriminant_group(name='(sigma_r) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
 
 def tau_invariant_sublattice(intersection_matrix=None):
-    basis = sp.Matrix.hstack(*compute_orbits(group_action_matrix=tau.matrix))
+    orbits = compute_orbits(group_action_matrix=tau.matrix)
+    basis = sp.Matrix.hstack(*orbit_basis(orbits))
     print_rank_and_discriminant_group(name='(tau) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
 
 intersection_mat = compute_intersection_matrix()
