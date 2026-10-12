@@ -38,3 +38,4 @@ for exceptional_idx, set_of_intersecting_lines in enumerate(lines_through_except
         x2_intersection_matrix[exceptional_idx + len(lines) - len(exceptional_points), class_idx] = 1
 
 sp.pprint(x2_intersection_matrix)
+# todo: some bugs still in the code giving an incorrect matrix. However, it is mostly correct, and 
