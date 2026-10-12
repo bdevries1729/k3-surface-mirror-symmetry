@@ -1,9 +1,9 @@
 import sympy as sp
-import csv
 from k3_example.named_lines import get_label, compute_c1_names
 from k3_example.x1.lines import ci_labels, ci_matrices
 from collections import defaultdict
 from k3_example.compare import matrix_key
+from k3_example.output import output_matrix
 
 def intersect(line_mat_1: sp.Matrix, line_mat_2: sp.Matrix) -> bool:
     '''
@@ -35,35 +35,24 @@ def intersection_matrix_value(i: int, j: int) -> int:
     return 1 if intersect(ci_matrices[i], ci_matrices[j]) else 0
 
 
-def compute_intersection_matrix() -> sp.Matrix:
+def compute_x1_intersection_matrix() -> sp.Matrix:
     n = len(ci_labels)
     return sp.Matrix([[intersection_matrix_value(i, j) for i in range(n)] for j in range(n)])
 
-def generate_and_output_matrix(print_to_terminal:bool=True) -> None:
-    '''
-    Generates the X1 intersection matrix, optionally prints to the terminal, and then saves the 
-    matrix to `output/x1_intersections.txt`.
-    '''
-    x1_int_matrix = compute_intersection_matrix()
-    sp.pprint(x1_int_matrix)
-    with open('output/x1_intersections.txt', 'w', newline='') as f:
-        # write the curve labels first
-        f.write('Curves:\n')
-        names = compute_c1_names()
-        labels = [get_label(i, m, n, names) for i, m, n in ci_labels]
-        f.write('\n'.join([f'{i+1}. {labels[i]}' for i in range(len(labels))]))
-        f.write('\n\n')
-
-        writer = csv.writer(f)
-        writer.writerows(x1_int_matrix.tolist())
+def generate_and_output_x1_matrix(print_to_terminal:bool=True) -> None:
+    names = compute_c1_names()
+    labels = [get_label(i, m, n, names) for i, m, n in ci_labels]
+    x1_int_matrix = compute_x1_intersection_matrix()
+    output_matrix('x1_intersections.txt', labels, x1_int_matrix, print_to_terminal)
 
 # this could be made more efficient. It suffices as a first pass.
 def compute_intersection_points():
-    names = compute_c1_names()
+    print("Computing intersection points. Please wait...")
     pts = defaultdict(set)
     for i in range(len(ci_labels)):
         for j in range(i): # notice i != j so we avoid infinite intersection case
             if intersect(ci_matrices[i], ci_matrices[j]):
                 pt = matrix_key(sp.Matrix(intersect_point(ci_matrices[i], ci_matrices[j])))
                 pts[pt].update([i, j])
+    print("Intersection point computation done!")
     return pts

@@ -1,5 +1,5 @@
 import sympy as sp
-from k3_example.x1.intersections import compute_intersection_matrix
+from k3_example.x1.intersections import compute_x1_intersection_matrix
 
 def normalize_by_lcm(vec):
     denoms = []
@@ -23,7 +23,7 @@ def unit_first_indexes(vec):
 
 def find_basis(intersection_matrix=None, basis=None):
     if intersection_matrix is None:
-        intersection_matrix = compute_intersection_matrix()
+        intersection_matrix = compute_x1_intersection_matrix()
     if basis is None:
         basis = sp.eye(intersection_matrix.rows)
     if 0 not in intersection_matrix.eigenvals():

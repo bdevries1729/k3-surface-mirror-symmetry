@@ -1,4 +1,4 @@
-from k3_example.x1.intersections import compute_intersection_matrix
+from k3_example.x1.intersections import compute_x1_intersection_matrix
 import k3_example.x1.automorphisms.xy_permutation as xy
 import sympy as sp
 from sympy.matrices.normalforms import smith_normal_form
@@ -12,7 +12,7 @@ def print_rank_and_discriminant_group(name='', intersection_matrix=None, basis=N
         print()
     print(name)
     if intersection_matrix is None:
-        intersection_matrix = compute_intersection_matrix()
+        intersection_matrix = compute_x1_intersection_matrix()
     if basis is None:
         basis = sp.eye(intersection_mat.rows)
     intersec_mat_in_new_basis = basis.T * intersection_matrix * basis
@@ -39,7 +39,7 @@ def tau_invariant_sublattice(intersection_matrix=None):
     basis = sp.Matrix.hstack(*orbit_basis(orbits))
     print_rank_and_discriminant_group(name='(tau) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
 
-intersection_mat = compute_intersection_matrix()
+intersection_mat = compute_x1_intersection_matrix()
 full_picard(intersection_mat)
 xy_invariant_sublattice(intersection_mat)
 sigma_r_invariant_sublattice(intersection_mat)

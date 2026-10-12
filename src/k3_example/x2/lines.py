@@ -21,16 +21,22 @@ def compute_quotient_orbits(c1_names=None):
     quotient_matrix = sigma_l.matrix ** 4
     return compute_orbits(quotient_matrix, print_to_terminal=False, c1_names=c1_names)
 
-c1_names = compute_c1_names()
-line_labels = [get_label(*label_indices, names=c1_names) for label_indices in ci_labels]
-exceptional_points, lines_through_exceptional_point = compute_exceptional_points_and_lines()
-exceptional_point_labels = [' ∩ '.join(['('+line_labels[i]+')' for i in intersecting_lines]) for intersecting_lines in lines_through_exceptional_point]
-line_labels.extend(exceptional_point_labels)
-lines = compute_quotient_orbits(c1_names=c1_names)
-# add the exceptional curves to the end
-lines.extend([[i] for i in range(len(ci_matrices), len(ci_matrices)+len(exceptional_points))])
-line_equivalence_class_labels = [[line_labels[i] for i in line_equivalence_class] for line_equivalence_class in lines]
+def compute_lines(c1_names=None):
+    exceptional_points, lines_through_exceptional_point = compute_exceptional_points_and_lines()
+    lines = compute_quotient_orbits(c1_names=c1_names)
+    # add the exceptional curves to the end
+    lines.extend([[i] for i in range(len(ci_matrices), len(ci_matrices)+len(exceptional_points))])
+    return lines, lines_through_exceptional_point
 
-def equivalence_class_index_from_line_index(i):
+def compute_line_labels(lines, lines_through_exceptional_point, c1_names=None):
+    if c1_names is None:
+        c1_names = compute_c1_names()
+    line_labels = [get_label(*label_indices, names=c1_names) for label_indices in ci_labels]
+    exceptional_point_labels = [' ∩ '.join(['('+line_labels[i]+')' for i in intersecting_lines]) for intersecting_lines in lines_through_exceptional_point]
+    line_labels.extend(exceptional_point_labels)
+    line_equivalence_class_labels = [' ~ '.join([line_labels[i] for i in line_equivalence_class]) for line_equivalence_class in lines]
+    return line_equivalence_class_labels
+
+def equivalence_class_index_from_line_index(i, lines):
     return next((j for j, line_equivalence_class in enumerate(lines) if i in line_equivalence_class), None)
     
