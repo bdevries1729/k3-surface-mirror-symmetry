@@ -4,6 +4,7 @@ import sympy as sp
 from sympy.matrices.normalforms import smith_normal_form
 from k3_example.orbits import compute_orbits, orbit_basis
 import k3_example.x1.automorphisms.xy_permutation as xy
+import k3_example.x1.automorphisms.xzyw_permutation as xzyw
 import k3_example.x1.automorphisms.sigma_r as sigma_r
 import k3_example.x1.automorphisms.tau as tau
 
@@ -29,6 +30,11 @@ def xy_invariant_sublattice(intersection_matrix=None):
     basis = sp.Matrix.hstack(*orbit_basis(orbits))
     print_rank_and_discriminant_group(name='(xy) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
 
+def xzyw_invariant_sublattice(intersection_matrix=None):
+    orbits = compute_orbits(group_action_matrix=xzyw.permutation_matrix)
+    basis = sp.Matrix.hstack(*orbit_basis(orbits))
+    print_rank_and_discriminant_group(name='(xzyw) invariant sublattice', intersection_matrix=intersection_matrix, basis=basis)
+
 def sigma_r_invariant_sublattice(intersection_matrix=None):
     orbits = compute_orbits(group_action_matrix=sigma_r.matrix)
     basis = sp.Matrix.hstack(*orbit_basis(orbits))
@@ -42,5 +48,16 @@ def tau_invariant_sublattice(intersection_matrix=None):
 intersection_mat = compute_x1_intersection_matrix()
 full_picard(intersection_mat)
 xy_invariant_sublattice(intersection_mat)
-sigma_r_invariant_sublattice(intersection_mat)
-tau_invariant_sublattice(intersection_mat)
+xzyw_invariant_sublattice(intersection_mat)
+# sigma_r_invariant_sublattice(intersection_mat)
+# tau_invariant_sublattice(intersection_mat)
+
+# for m in range(2):
+#     for n in range(8):
+#         sigma = (tau.matrix ** m) * (sigma_r.matrix ** n)
+#         print(sigma)
+#         orbits = compute_orbits(group_action_matrix=sigma, print_to_terminal=True)
+#         basis = sp.Matrix.hstack(*orbit_basis(orbits))
+#         print_rank_and_discriminant_group(name=f'({m}, {n}) invariant sublattice', intersection_matrix=intersection_mat, basis=basis)
+#         print('-----------------------------------------')
+
