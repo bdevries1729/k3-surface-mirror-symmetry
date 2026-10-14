@@ -47,9 +47,9 @@ def tau_invariant_sublattice(intersection_matrix=None):
 
 intersection_mat = compute_x1_intersection_matrix()
 full_picard(intersection_mat)
-xy_invariant_sublattice(intersection_mat)
-xzyw_invariant_sublattice(intersection_mat)
-# sigma_r_invariant_sublattice(intersection_mat)
+# xy_invariant_sublattice(intersection_mat)
+# xzyw_invariant_sublattice(intersection_mat)
+sigma_r_invariant_sublattice(intersection_mat)
 # tau_invariant_sublattice(intersection_mat)
 
 # for m in range(2):

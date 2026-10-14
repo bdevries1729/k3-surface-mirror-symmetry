@@ -13,7 +13,8 @@ def compute_orbits(group_action_matrix: sp.Matrix, print_to_terminal:bool=False,
     if c1_names is None:
         c1_names = compute_c1_names()
     ci_matrices_rref = [ci_mat.rref() for ci_mat in ci_matrices]
-    image_under_action_rref =  [(ci_mat * group_action_matrix).rref() for ci_mat in ci_matrices]
+    # notice that if x -> sigma(x), then sigma({f(x) = 0}) = {f(sigma^(-1)(x)) = 0}
+    image_under_action_rref =  [(ci_mat * group_action_matrix**-1).rref() for ci_mat in ci_matrices]
     permut = Permutation(find_idxs(ci_matrices_rref, image_under_action_rref))
     if print_to_terminal:
         pprint([[get_label(*ci_labels[i], names=c1_names) for i in cycle] for cycle in permut.cyclic_form])
