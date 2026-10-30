@@ -1,5 +1,5 @@
-from k3_example.orbits import compute_orbits
-import k3_example.x1.automorphisms.sigma_l as sigma_l
+from k3_example.x1.orbits import compute_x1_orbits
+import k3_example.automorphisms.sigma_l as sigma_l
 from k3_example.x1.lines import ci_labels, ci_matrices
 from k3_example.x1.intersections import compute_intersection_points
 from k3_example.named_lines import get_label, compute_c1_names
@@ -19,7 +19,7 @@ def compute_exceptional_points_and_lines():
 
 def compute_quotient_orbits(c1_names=None):
     quotient_matrix = sigma_l.matrix ** 4
-    return compute_orbits(quotient_matrix, print_to_terminal=False, c1_names=c1_names)
+    return compute_x1_orbits(quotient_matrix, print_to_terminal=False, c1_names=c1_names)
 
 def compute_lines(c1_names=None):
     exceptional_points, lines_through_exceptional_point = compute_exceptional_points_and_lines()
