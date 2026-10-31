@@ -16,7 +16,7 @@ def compute_x1_orbits(group_action_matrix: sp.Matrix, print_to_terminal=False, c
     Generates the orbits of lines under `group_action_matrix`. The argument `print_to_terminal` may be enabled, and names for `c1_curves` 
     is optionally provided to eliminate the need to re-compute.
     '''
-    if c1_names is None:
+    if c1_names is None and print_to_terminal:
         c1_names = compute_c1_names()
     permut = compute_x1_permutation(group_action_matrix)
     if print_to_terminal:

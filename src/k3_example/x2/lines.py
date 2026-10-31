@@ -35,8 +35,4 @@ def compute_line_labels(lines, lines_through_exceptional_point, c1_names=None):
     exceptional_point_labels = [' ∩ '.join(['('+line_labels[i]+')' for i in intersecting_lines]) for intersecting_lines in lines_through_exceptional_point]
     line_labels.extend(exceptional_point_labels)
     line_equivalence_class_labels = [' ~ '.join([line_labels[i] for i in line_equivalence_class]) for line_equivalence_class in lines]
-    return line_equivalence_class_labels
-
-def equivalence_class_index_from_line_index(i, lines):
-    return next((j for j, line_equivalence_class in enumerate(lines) if i in line_equivalence_class), None)
-    
+    return line_equivalence_class_labels    

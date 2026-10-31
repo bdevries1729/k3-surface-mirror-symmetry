@@ -8,3 +8,6 @@ def same_line(line_1_matrix: sp.Matrix, line_2_matrix: sp.Matrix, row_reduce=Tru
     if not row_reduce:
         return line_1_matrix == line_2_matrix
     return line_1_matrix.rref() == line_2_matrix.rref()
+
+def equivalence_class_index_from_line_index(i, line_equiv_classes):
+    return next((j for j, equiv_class in enumerate(line_equiv_classes) if i in equiv_class), None)

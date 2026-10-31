@@ -1,5 +1,6 @@
 import sympy as sp
-from k3_example.x2.lines import compute_lines, compute_line_labels, equivalence_class_index_from_line_index
+from k3_example.line_helper import equivalence_class_index_from_line_index
+from k3_example.x2.lines import compute_lines, compute_line_labels
 from k3_example.x1.orbits import compute_x1_permutation
 from sympy.combinatorics import Permutation
 from pprint import pprint

@@ -1,6 +1,7 @@
 import sympy as sp
+from k3_example.line_helper import equivalence_class_index_from_line_index
 from k3_example.x1.intersections import compute_x1_intersection_matrix
-from k3_example.x2.lines import compute_lines, compute_line_labels, equivalence_class_index_from_line_index
+from k3_example.x2.lines import compute_lines, compute_line_labels
 from k3_example.output import output_matrix
 
 def compute_x2_intersection_matrix(lines=None, lines_through_exceptional_point=None, x1_intersection_matrix=None) -> sp.Matrix:
