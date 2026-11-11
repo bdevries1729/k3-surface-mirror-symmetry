@@ -8,7 +8,7 @@ from pprint import pprint
 def exceptional_point_permut(permut, lines, lines_through_exceptional_point):
     pts = {tuple(sorted(lst)): i for i, lst in enumerate(lines_through_exceptional_point)}
     idx_offset = len(lines) - len(lines_through_exceptional_point)
-    return [pts[tuple(sorted([i^permut for i in lns]))]+idx_offset for lns in lines_through_exceptional_point] # type: ignore
+    return [pts[tuple(sorted([i^permut for i in lns]))]+idx_offset for lns in lines_through_exceptional_point]
 
 def compute_x2_orbits(group_action_matrix: sp.Matrix, print_to_terminal=False, lines=None, lines_through_exceptional_point=None, labels=None) -> list[list[int]]:
     if lines is None or lines_through_exceptional_point is None:

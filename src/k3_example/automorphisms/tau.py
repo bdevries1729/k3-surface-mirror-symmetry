@@ -4,4 +4,4 @@ import k3_example.automorphisms.sigma_l as sigma_l
 import k3_example.automorphisms.sigma_r as sigma_r
 
 zeta = sp.exp(2*pi*I/8)
-matrix = sigma_l.matrix * sigma_r.matrix # type: ignore
+matrix = sigma_l.matrix * sigma_r.matrix

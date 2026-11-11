@@ -31,7 +31,7 @@ def find_basis(intersection_matrix=None, basis=None):
     intersection_mat_for_basis = basis.T * intersection_matrix * basis
     null_space = next((val[2] for val in intersection_mat_for_basis.eigenvects() if val[0] == 0), [])
 
-    integer_eigenvecs = [list(normalize_by_lcm(vec)) for vec in null_space if vec is not None] # type: ignore
+    integer_eigenvecs = [list(normalize_by_lcm(vec)) for vec in null_space if vec is not None]
     if len(integer_eigenvecs) == 0:
         return basis
     
